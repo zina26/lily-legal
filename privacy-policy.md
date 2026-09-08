@@ -84,10 +84,6 @@ The guidance, reflections, summaries, and songs Lily generates for you are visib
 
 **We never see or store your payment card details.** Subscriptions are sold and billed entirely through Apple's App Store (or Google Play, for Android if offered). Apple and Google collect and hold your payment information directly — we only receive confirmation that a purchase happened and your subscription status.
 
-That confirmation is relayed through a subscription management processor, which verifies and manages your subscription across devices. It receives your purchase and subscription events, not your payment details — never your card number, billing address, or any other payment credential. Retained per that processor's own terms.
-
-If you sign in with **Apple** or **Google**, that same company also authenticates you using the identity token you choose to share, governed by its own privacy terms.
-
 Refunds are handled by Apple/Google according to their own policies, not by us directly.
 
 ## 8. Legal bases for processing (EU/UK)
