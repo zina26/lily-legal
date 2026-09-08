@@ -60,16 +60,10 @@ def build():
     privacy = (ROOT / 'privacy.html').read_text()
     css = re.search(r'<style>(.*?)</style>', privacy, re.S).group(1)
     extra_css = '''
-  .legal-nav { margin: 0 0 24px; font-size: 14px; }
-  .legal-nav a { display: inline-block; padding: 8px 0; }
   a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-  .skip { position: absolute; left: 16px; top: -100px; }
-  .skip:focus { top: 12px; background: var(--card); padding: 8px; }
   p, a { overflow-wrap: anywhere; }
   @media (max-width: 560px) {
     .wrap { padding: 32px 20px 64px; }
-    nav.toc ol { columns: 1; -webkit-columns: 1; }
-    nav.toc a { display: inline-block; padding: 4px 0; }
   }
 '''
     page = f'''<!doctype html>
@@ -82,15 +76,11 @@ def build():
 <style>{css}{extra_css}</style>
 </head>
 <body>
-<a class="skip" href="#content">Skip to terms</a>
 <div class="wrap">
-<nav class="legal-nav" aria-label="Legal documents"><a href="privacy.html">Privacy Policy</a> · <a href="terms.html" aria-current="page">Terms of Service</a></nav>
 <header><h1>Lily Terms of Service</h1><p class="updated">{html.escape(date)}</p></header>
-<nav class="toc" aria-label="Table of contents"><h2>Contents</h2><ol>{''.join(toc)}</ol></nav>
 <main id="content" tabindex="-1">
 {chr(10).join(body)}
 </main>
-<footer>Lily — <a href="mailto:zinazx9726@gmail.com">zinazx9726@gmail.com</a><br><a href="privacy.html">Privacy Policy</a> · <a href="terms-of-service.md">Download Markdown</a></footer>
 </div>
 </body>
 </html>
