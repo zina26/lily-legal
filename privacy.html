@@ -92,6 +92,9 @@
   p.intro { margin: 0 0 32px; color: var(--muted); }
   ul { margin: 0 0 14px; padding-left: 22px; }
   li { margin-bottom: 6px; }
+  ol.vendor-list { margin: 0 0 16px; padding-left: 22px; }
+  ol.vendor-list li { margin-bottom: 16px; }
+  ol.vendor-list li:last-child { margin-bottom: 0; }
   table {
     width: 100%;
     border-collapse: collapse;
@@ -297,45 +300,53 @@
     <p>We do not sell your data. We share the minimum necessary information
     with the following processors, each acting under a contract that limits
     what they can do with it:</p>
-    <table>
-      <tr><th>Who</th><th>What they receive</th><th>What for</th><th>Retention / training</th></tr>
-      <tr>
-        <td><strong>WaveSpeed</strong> (aggregation platform; internally routes to model providers including ElevenLabs and others for voice, and Mureka/Sonilo/Google Lyria for music)</td>
-        <td>Audio, for transcription and voice generation — always the minimum needed for that one request</td>
-        <td>Speech-to-text transcription, text-to-speech voice generation, song generation</td>
-        <td><strong>Not used for model training</strong> — confirmed directly with WaveSpeed (2026-09-07). We keep your data on our own side only as long as described in section 10; WaveSpeed's own published policy separately commits to a 7-day retention window for the output files it generates on our behalf.</td>
-      </tr>
-      <tr>
-        <td><strong>OpenRouter</strong>, forwarding to <strong>Anthropic</strong> (Claude)</td>
-        <td>Text prompts built from your content (for morning guidance, evening reflection, Reset responses, memory summaries, weekly/cycle reviews) — always the minimum needed for that one request, never your raw journal in full</td>
-        <td>Generating the written content described above</td>
-        <td>OpenRouter's own policy states it does not use your inputs/outputs to train models itself, and forwards them to the model provider you've configured (here, Anthropic) subject to that provider's terms. Anthropic's published commercial-API policy states: "By default, we will not use your inputs or outputs from our commercial products&nbsp;&hellip; to train our models." We use Anthropic's commercial API through OpenRouter, not their consumer Claude.ai product.</td>
-      </tr>
-      <tr>
-        <td><strong>Supabase</strong></td>
-        <td>Your account data, content, and generated content, as our database/authentication/storage infrastructure provider</td>
-        <td>Hosting the app's backend</td>
-        <td>Retained for as long as your account exists, per section 10; Supabase acts strictly as our infrastructure processor</td>
-      </tr>
-      <tr>
-        <td><strong>RevenueCat</strong></td>
-        <td>Purchase and subscription events (not your payment details)</td>
-        <td>Verifying and managing your subscription across devices</td>
-        <td>Retained per RevenueCat's processor terms; <span class="todo">link to their DPA to be added</span></td>
-      </tr>
-      <tr>
-        <td><strong>Apple</strong></td>
-        <td>Payment information (Apple, not us, collects and holds this), Sign in with Apple identity token if you use it</td>
-        <td>Processing App Store purchases; authenticating you if you choose this sign-in method</td>
-        <td>Governed by Apple's own privacy terms</td>
-      </tr>
-      <tr>
-        <td><strong>Google</strong></td>
-        <td>Sign in with Google identity token, if you use it</td>
-        <td>Authenticating you if you choose this sign-in method</td>
-        <td>Governed by Google's own privacy terms</td>
-      </tr>
-    </table>
+    <ol class="vendor-list">
+      <li><strong>WaveSpeed</strong>: an aggregation platform we use for
+      audio processing — transcription, voice generation, and song
+      generation. It internally routes requests to specialized providers
+      (including ElevenLabs for voice, and Mureka, Sonilo, and Google Lyria
+      for music). It receives only the audio needed for that one request,
+      never more. WaveSpeed has confirmed directly to us (2026-09-07) that it
+      does not use your data to train models. We keep our own copy of this
+      data only as long as described in section 10; WaveSpeed's own published
+      policy separately commits to a 7-day retention window for the output
+      files it generates on our behalf.</li>
+
+      <li><strong>OpenRouter</strong>, forwarding to <strong>Anthropic</strong>
+      (Claude): used to generate the written content Lily produces for you —
+      morning guidance, evening reflection, Reset responses, memory
+      summaries, and weekly/cycle reviews. It receives only the text prompt
+      built from your content that's needed for that one request, never your
+      raw journal in full. OpenRouter's own policy states it does not use
+      your inputs or outputs to train models itself, and forwards them to
+      the model provider you've configured (here, Anthropic) subject to that
+      provider's terms. Anthropic's published commercial-API policy states:
+      "By default, we will not use your inputs or outputs from our
+      commercial products&nbsp;&hellip; to train our models." We use
+      Anthropic's commercial API through OpenRouter, not their consumer
+      Claude.ai product.</li>
+
+      <li><strong>Supabase</strong>: our database, authentication, and
+      storage infrastructure provider. It hosts the app's backend, and as
+      part of that role receives your account data, content, and generated
+      content. It is retained for as long as your account exists (section
+      10), and Supabase acts strictly as our infrastructure processor.</li>
+
+      <li><strong>RevenueCat</strong>: used to verify and manage your
+      subscription across devices. It receives your purchase and
+      subscription events, not your payment details. Retained per
+      RevenueCat's own processor terms.
+      <span class="todo">link to their DPA to be added</span></li>
+
+      <li><strong>Apple</strong>: processes your App Store purchases, and —
+      if you choose that sign-in method — authenticates you with Sign in
+      with Apple. Apple, not us, collects and holds your payment information
+      directly. Governed by Apple's own privacy terms.</li>
+
+      <li><strong>Google</strong>: if you choose to sign in with Google,
+      authenticates you using your Google identity token. Governed by
+      Google's own privacy terms.</li>
+    </ol>
     <p>We may also disclose information if required by law, to protect
     someone's safety (see section 13), or as part of a business transfer if
     Lily is ever acquired or merged — in which case this policy would
