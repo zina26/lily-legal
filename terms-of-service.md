@@ -2,7 +2,7 @@
 
 Effective date: September 8, 2026
 
-Lily is a space for personal reflection and growth. These Terms explain the agreement between you and Xin Zhao, the individual operator of Lily ("we," "us," or "our"), when you use the Lily app and its related services (the "Services"). Our contact details are in section 16.
+Lily is a space for personal reflection and growth. These Terms govern your use of the Lily app and its related services (the "Services"). In these Terms, "Lily," "we," "us," and "our" refer to the service operator identified in section 16, where you can also find our contact details.
 
 **Lily is not therapy, medical care, or an emergency service. If you are in immediate danger or may harm yourself or someone else, contact your local emergency services or a crisis line directly. Do not wait for a response from Lily.**
 
@@ -122,7 +122,7 @@ Any transfer of our responsibilities to a new operator must preserve your rights
 
 ## 16. Contact us
 
-Lily is operated by **Xin Zhao**, an individual.
+Service operator: **Xin Zhao**
 
 603 Wangjingyuan, Fu'an East Road / Beijing, Beijing 100020 / China
 
