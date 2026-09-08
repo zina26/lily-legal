@@ -257,48 +257,38 @@
       <li><strong>Only what's needed is sent</strong> — we send the minimum
       content required to produce that specific piece of content, not your
       full history.</li>
-      <li><strong>Never used to train AI</strong> — Anthropic, whose model
-      generates your written content, does not train on commercial API
-      inputs or outputs by default, and we have not opted in to allow it.
-      WaveSpeed, which handles audio (transcription, voice, and song
-      generation), has separately confirmed to us directly that it does not
-      use your data to train models.</li>
+      <li><strong>Never used to train AI without permission</strong> —
+      Anthropic, whose model generates your written content, states it does
+      not train on commercial API inputs or outputs by default, and we have
+      not opted in to allow it.</li>
     </ul>
     <p><strong>You can withdraw this consent at any time</strong> in
     Settings. Once withdrawn, we stop sending your content to AI providers
     for new processing. Content already generated remains available to you
     unless you separately delete it.</p>
-    <p>We provide these AI features through two processors, each receiving
-    only the minimum content needed for the one request it's handling, never
-    your full history:</p>
+    <p>Lily's AI features are powered by:</p>
     <ul>
-      <li><strong>WaveSpeed</strong>: an aggregation platform we use for
-      audio processing — transcription, voice generation, and song
-      generation. It internally routes requests to specialized providers
-      (including ElevenLabs for voice, and Mureka, Sonilo, and Google Lyria
-      for music). WaveSpeed has confirmed directly to us (2026-09-07) that it
-      does not use your data to train models. We keep our own copy of this
-      data only as long as described in section 9; WaveSpeed's own published
-      policy separately commits to a 7-day retention window for the output
-      files it generates on our behalf.</li>
-      <li><strong>OpenRouter</strong>, forwarding to <strong>Anthropic</strong>
-      (Claude): generates the written content described above — morning
-      guidance, evening reflection, Reset responses, memory summaries, and
-      weekly/cycle reviews — from a text prompt built from your content.
-      OpenRouter's own policy states it does not use your inputs or outputs
-      to train models itself, and forwards them to the model provider you've
-      configured (here, Anthropic) subject to that provider's terms.
-      Anthropic's published commercial-API policy states: "By default, we
-      will not use your inputs or outputs from our commercial
-      products&nbsp;&hellip; to train our models." We use Anthropic's
-      commercial API through OpenRouter, not their consumer Claude.ai
-      product. OpenRouter's own policy also states it may transfer data to
-      the US or countries outside the European Economic Area, and relies on
-      EU standard contractual clauses and adequacy decisions for those
-      transfers.</li>
+      <li><strong>Anthropic</strong> (Claude): generates the written content
+      described above — morning guidance, evening reflection, Reset
+      responses, memory summaries, and weekly/cycle reviews — from a text
+      prompt built from your content, never your raw journal in full.
+      Anthropic's published policy states: "By default, we will not use your
+      inputs or outputs from our commercial products&nbsp;&hellip; to train
+      our models."</li>
+      <li><strong>OpenAI</strong> (Whisper): transcribes your voice
+      recordings into text, for the recordings that aren't already
+      transcribed on your device (section 5).</li>
+      <li><strong>ElevenLabs</strong>: generates the spoken-voice audio for
+      your guidance and Reset responses, from the minimum text needed for
+      that one request.</li>
+      <li><strong>WaveSpeed</strong>: generates that spoken-voice audio in
+      ElevenLabs' place if ElevenLabs is unavailable, using WaveSpeed's own
+      model.</li>
+      <li><strong>Mureka</strong>: generates your personalized songs, from
+      the minimum content needed for that one request.</li>
     </ul>
-    <p>You must not use Lily's AI features in a way that violates
-    WaveSpeed's or OpenRouter's/Anthropic's own terms of service.</p>
+    <p>You must not use Lily's AI features in a way that violates any of
+    these providers' own terms of service.</p>
     <p>AI-generated content is provided for reflection, not as professional
     advice. It can be wrong, generic, or miss context — it's produced by a
     language model reading your words, not a person who knows you.</p>
@@ -311,13 +301,17 @@
   <section id="s5">
     <h2>5. Voice and audio transcription</h2>
     <p>If you speak instead of type, your recording is saved to your device
-    first, then uploaded to transcribe it into text. The audio and its
-    transcript are processed by WaveSpeed (section 4) solely to produce that
-    transcription or, for guidance and Reset audio, to produce spoken-voice
-    output. We do not use your voice recordings for anything beyond
-    generating the content you asked for and keeping the service reliable —
-    not for marketing, not for training AI models, and not shared with
-    anyone outside the processors described there.</p>
+    first, then uploaded to your private, account-scoped storage (section 2)
+    — this happens regardless of how it gets transcribed. Converting what
+    you said into text is attempted on your device first, using Apple's own
+    on-device speech recognition; when that succeeds, your words are not
+    sent anywhere else for this step. If on-device transcription isn't
+    available (for example, on an older iOS version or in an unsupported
+    language) or fails, the recording is sent to OpenAI's Whisper model to
+    transcribe it instead. We do not use your voice recordings for anything
+    beyond generating the content you asked for and keeping the service
+    reliable — not for marketing, not for training AI models, and not
+    shared with anyone outside the AI providers described in section 4.</p>
   </section>
 
   <section id="s6">
@@ -336,12 +330,11 @@
     Google Play, for Android if offered). Apple and Google collect and hold
     your payment information directly — we only receive confirmation that a
     purchase happened and your subscription status.</p>
-    <p>That confirmation is relayed through <strong>RevenueCat</strong>,
-    which verifies and manages your subscription across devices. RevenueCat
-    receives your purchase and subscription events, not your payment
+    <p>That confirmation is relayed through a subscription management
+    processor, which verifies and manages your subscription across devices.
+    It receives your purchase and subscription events, not your payment
     details — never your card number, billing address, or any other payment
-    credential. Retained per RevenueCat's own processor terms.
-    <span class="todo">link to their DPA to be added</span></p>
+    credential. Retained per that processor's own terms.</p>
     <p>If you sign in with <strong>Apple</strong> or <strong>Google</strong>,
     that same company also authenticates you using the identity token you
     choose to share, governed by its own privacy terms.</p>
