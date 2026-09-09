@@ -2,6 +2,7 @@
 
 - [Privacy Policy](https://zina26.github.io/lily-legal/privacy.html) — `privacy-policy.md`; `privacy.html` and `index.html` carry the same policy.
 - [Terms of Service](https://zina26.github.io/lily-legal/terms.html) — `terms-of-service.md` is the source; `terms.html` is generated.
+- [Support](https://zina26.github.io/lily-legal/support.html) — `support.html` is hand-written (contact email, FAQ on subscription / data / voice); the URL is what goes in App Store Connect's required Support URL field.
 
 ## Editing and publishing terms
 
