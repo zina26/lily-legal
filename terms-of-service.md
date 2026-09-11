@@ -58,7 +58,7 @@ Payments for iOS subscriptions are handled by Apple through your Apple Account. 
 
 You can manage or cancel a subscription in **iPhone Settings → your name → Subscriptions → Lily**, or follow [Apple's cancellation instructions](https://support.apple.com/en-us/118428). For a paid subscription, cancellation normally stops the next renewal and access continues until the current paid period ends, subject to Apple's rules and any refund. Trial access may end sooner when canceled.
 
-**Deleting Lily, deleting your Lily account, or withdrawing AI consent does not cancel your App Store subscription.** Cancel it separately through Apple if you no longer want it to renew.
+**Deleting Lily, deleting your Lily account, or deleting your data does not cancel your App Store subscription.** Cancel it separately through Apple if you no longer want it to renew.
 
 For purchases billed by Apple, request a refund at [reportaproblem.apple.com](https://reportaproblem.apple.com/). Eligibility depends on Apple's rules and applicable law; see [Apple's refund guidance](https://support.apple.com/en-us/118223). This does not limit any statutory remedy you may have against us.
 
@@ -80,7 +80,7 @@ Some features depend on third-party services and may be interrupted or changed i
 
 ## 10. Your data choices and leaving Lily
 
-You can withdraw AI processing consent in Settings. New AI processing will stop as described in the Privacy Policy; features that need it will not work while consent is withdrawn. Previously generated content remains available unless you delete it, subject to applicable access conditions.
+AI processing is required to use Lily. You agree to it before you begin, and Lily cannot be used without it. To end it, delete your data in Settings and stop using Lily: new AI processing stops and we remove what we hold, as described in the Privacy Policy. Previously generated content remains available until you delete it, subject to applicable access conditions.
 
 You can export your data or request account deletion in **Settings → Privacy & data**. The Privacy Policy explains what is retained, what is deleted, and how interrupted deletion is handled. Export content you wish to keep before deleting your account. Deleting the app alone is not an account deletion request.
 

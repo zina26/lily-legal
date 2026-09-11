@@ -62,7 +62,9 @@ We do not use your voice recordings to train AI models. We have not opted in to 
 
 ### Your choice
 
-You can withdraw your consent to AI processing at any time in Settings. We will stop sending your content to AI providers for new processing. Content already generated remains available unless you delete it. Features that need new AI processing will no longer be available while consent is withdrawn.
+AI processing is how Lily works: without sending what you share to an AI provider, there is nothing for Lily to write back. That is why we ask you to agree before you begin, and why Lily cannot be used without it.
+
+You can end this at any time. Because the service cannot run without this processing, ending it means stopping your use of Lily: delete your data in Settings (see “Deleting your data”) and stop using the app. We stop processing and remove what we hold. Content already generated remains available until you delete it.
 
 AI-generated content may be inaccurate or miss important context. It is intended for personal reflection, not professional advice. You must not use Lily's AI features in ways that violate the applicable providers' terms.
 
@@ -92,7 +94,7 @@ If you are located in the EU or UK, this section applies to you. The General Dat
 
 - **Performance of a contract** — providing the core service: storing your entries, showing your history, and processing your subscription.
 
-- **Your consent** — sending your content to an AI provider to generate a response for you. This consent is asked for separately and explicitly (section 4), and you can withdraw it at any time.
+- **Your consent** — sending your content to an AI provider to generate a response for you. This consent is asked for separately and explicitly (section 4). You can end it at any time by deleting your data in Settings and stopping your use of Lily; because Lily cannot function without this processing, there is no reduced mode in which Lily continues without it.
 
 - **Our legitimate interests** — diagnostics and reliability (keeping the service working), and responding when you contact us for support.
 
@@ -130,7 +132,7 @@ Depending on where you live, you may have the right to:
 
 - **Export** your data in a portable format
 
-- **Withdraw consent** to AI processing at any time
+- **End AI processing** at any time, by deleting your data and stopping your use of Lily
 
 - **Object to or restrict** certain processing
 
