@@ -84,9 +84,9 @@
       <p>Set it here, then go back to Lily and sign in.</p>
       <form id="form" novalidate>
         <label for="pw1">New password</label>
-        <input id="pw1" type="password" autocomplete="new-password" minlength="8" required>
+        <input id="pw1" type="password" autocomplete="new-password" minlength="6" required>
         <label for="pw2">Type it again</label>
-        <input id="pw2" type="password" autocomplete="new-password" minlength="8" required>
+        <input id="pw2" type="password" autocomplete="new-password" minlength="6" required>
         <p class="msg error" id="err" hidden></p>
         <div class="center">
           <button class="button" id="save" type="submit">Save new password</button>
@@ -161,8 +161,11 @@
           var pw1 = document.getElementById("pw1").value;
           var pw2 = document.getElementById("pw2").value;
           err.hidden = true;
-          if (pw1.length < 8) {
-            err.textContent = "Use at least 8 characters.";
+          // **至少 6 位，和 App 里 `validateCredentials` 同一个数**
+          // （也和 Supabase 后台的 password_min_length 一致，2026-09-16 查过）。
+          // 这里原来写的是 8：同一个账号两套规矩，网页拒掉的密码在 App 里是合法的。
+          if (pw1.length < 6) {
+            err.textContent = "Use at least 6 characters.";
             err.hidden = false;
             return;
           }
