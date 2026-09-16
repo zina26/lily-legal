@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lily — Email confirmed</title>
+<title>Lily</title>
 <style>
   :root {
     color-scheme: light;
@@ -13,6 +13,7 @@
     --bg: #faf9fb;
     --card: #ffffff;
     --accent: #5b3f8f;
+    --danger: #a3323f;
   }
   * { box-sizing: border-box; }
   body {
@@ -37,36 +38,176 @@
   }
   h1 { font-size: 22px; margin: 0 0 12px; }
   p { color: var(--muted); margin: 0 0 24px; }
-  a.button {
+  a.button, button.button {
     display: inline-block;
     background: var(--accent);
     color: #fff;
+    border: 0;
     text-decoration: none;
     padding: 14px 28px;
     border-radius: 999px;
+    font: inherit;
     font-weight: 600;
     min-width: 200px;
+    min-height: 48px;
+    cursor: pointer;
   }
+  button.button[disabled] { background: #b2a8c4; cursor: default; }
   .hint { font-size: 14px; margin: 20px 0 0; }
+  form { text-align: left; }
+  label { display: block; font-size: 14px; font-weight: 600; margin: 0 0 6px; color: var(--ink); }
+  input[type="password"] {
+    width: 100%;
+    font: inherit;
+    padding: 12px 14px;
+    min-height: 48px;
+    margin: 0 0 18px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--ink);
+  }
+  input[type="password"]:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .msg { margin: 0 0 18px; font-size: 14px; }
+  .msg.error { color: var(--danger); }
+  .center { text-align: center; }
+  [hidden] { display: none !important; }
 </style>
 </head>
 <body>
   <div class="card">
-    <h1>Email confirmed</h1>
-    <p>You can go back to Lily now.</p>
-    <a class="button" id="open" href="lily://auth-callback">Open Lily</a>
-    <p class="hint">If nothing happens, open the Lily app yourself — your email is already confirmed.</p>
+    <!-- 三种情形，只显示其中一种。默认全部藏起来，由脚本挑一个。 -->
+
+    <!-- 一、改密码：链接里带着 type=recovery -->
+    <div id="recovery" hidden>
+      <h1>Choose a new password</h1>
+      <p>Set it here, then go back to Lily and sign in.</p>
+      <form id="form" novalidate>
+        <label for="pw1">New password</label>
+        <input id="pw1" type="password" autocomplete="new-password" minlength="8" required>
+        <label for="pw2">Type it again</label>
+        <input id="pw2" type="password" autocomplete="new-password" minlength="8" required>
+        <p class="msg error" id="err" hidden></p>
+        <div class="center">
+          <button class="button" id="save" type="submit">Save new password</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- 二、改密码成功 -->
+    <div id="done" hidden>
+      <h1>Password updated</h1>
+      <p>Open Lily and sign in with your new password.</p>
+      <a class="button" id="openAfterReset" href="lily://auth-callback">Open Lily</a>
+    </div>
+
+    <!-- 三、注册确认（原来的那一种） -->
+    <div id="confirmed" hidden>
+      <h1>Email confirmed</h1>
+      <p>You can go back to Lily now.</p>
+      <a class="button" id="open" href="lily://auth-callback">Open Lily</a>
+      <p class="hint">If nothing happens, open the Lily app yourself — your email is already confirmed.</p>
+    </div>
+
+    <!-- 四、链接本身就是坏的（过期、用过了） -->
+    <div id="broken" hidden>
+      <h1>This link no longer works</h1>
+      <p id="brokenWhy">Request a new one from Lily and open it within the hour.</p>
+    </div>
   </div>
 
   <script>
     // Supabase 把令牌放在地址栏的「#」后面，而「#」后面的东西不会发给服务器
-    // ——**只有这段脚本读得到它**，所以转交必须在浏览器里做。
-    //
-    // 为什么要经过这张页面，而不让邮件里的链接直接跳 lily://：
-    // 有些邮箱（实测 QQ 邮箱）的内置浏览器不认这种「打开 App」的地址，
-    // 直接跳会又一次白屏。**网页这一跳在任何客户端里都落得下来**，
-    // 落下来之后再试着进 App，进不去也还有一句话和一个按钮。
+    // ——**只有这段脚本读得到它**，所以一切都必须在浏览器里做。
     (function () {
+      var SUPABASE_URL = "https://cdrmirlgediuordgvunq.supabase.co";
+      // 这个键是「可发布」的那一把，**每一份 App 的 Info.plist 里本来就带着它**
+      // （2026-09-16 拆 build 29 的 ipa 核过）。放在这里不多暴露任何东西。
+      var PUBLISHABLE_KEY = "sb_publishable_GgFOJbNdz6JzoL2qzeaXsg_WoxEin_p";
+
+      function show(id) { document.getElementById(id).hidden = false; }
+
+      var hash = (location.hash || "").replace(/^#/, "");
+      var params = new URLSearchParams(hash);
+      var type = params.get("type");
+      var accessToken = params.get("access_token");
+      var errorDescription = params.get("error_description") || params.get("error");
+
+      // **坏链接要说出来，不能装作成功。**
+      // 原来这一版无论收到什么都显示「Email confirmed」——
+      // 产品负责人 2026-09-16 用改密码的链接点进来，看到的就是「邮箱已确认」，
+      // 而密码一个字没改。
+      if (errorDescription) {
+        document.getElementById("brokenWhy").textContent =
+          decodeURIComponent(errorDescription).replace(/\+/g, " ") +
+          " — request a new link from Lily.";
+        show("broken");
+        return;
+      }
+
+      // 一、改密码。**在网页上当场改完，不再指望跳回 App。**
+      //
+      // 为什么不跳 App：`lily://` 这种地址在一些邮箱的内置浏览器里（实测 QQ 邮箱）
+      // 根本不被接受，点了没有任何反应。对注册确认那条路这还能忍——邮箱确实已经
+      // 确认了，人自己打开 App 就行；**对改密码完全不能忍：什么都没发生，
+      // 而三扇门（旧密码、重新注册、忘记密码）这时全是关着的。**
+      if (type === "recovery" && accessToken) {
+        show("recovery");
+        var form = document.getElementById("form");
+        var err = document.getElementById("err");
+        var save = document.getElementById("save");
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          var pw1 = document.getElementById("pw1").value;
+          var pw2 = document.getElementById("pw2").value;
+          err.hidden = true;
+          if (pw1.length < 8) {
+            err.textContent = "Use at least 8 characters.";
+            err.hidden = false;
+            return;
+          }
+          if (pw1 !== pw2) {
+            err.textContent = "The two passwords don’t match.";
+            err.hidden = false;
+            return;
+          }
+          save.disabled = true;
+          save.textContent = "Saving…";
+          fetch(SUPABASE_URL + "/auth/v1/user", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              "apikey": PUBLISHABLE_KEY,
+              "Authorization": "Bearer " + accessToken
+            },
+            body: JSON.stringify({ password: pw1 })
+          }).then(function (response) {
+            return response.json().then(function (body) {
+              return { ok: response.ok, body: body };
+            });
+          }).then(function (result) {
+            if (!result.ok) {
+              // **服务端说什么就显示什么**，不要替它编一句好听的：
+              // 「密码太弱」和「链接过期了」是两件事，而用户的下一步不一样。
+              throw new Error((result.body && (result.body.msg || result.body.error_description ||
+                result.body.message)) || "Could not update the password.");
+            }
+            document.getElementById("recovery").hidden = true;
+            show("done");
+            document.getElementById("openAfterReset")
+              .setAttribute("href", "lily://auth-callback");
+          }).catch(function (e) {
+            err.textContent = e.message;
+            err.hidden = false;
+            save.disabled = false;
+            save.textContent = "Save new password";
+          });
+        });
+        return;
+      }
+
+      // 二、注册确认。保持原来的行为：试着跳回 App，跳不动也有一句话和一颗按钮。
+      show("confirmed");
       var target = "lily://auth-callback" + (location.hash || "");
       document.getElementById("open").setAttribute("href", target);
       // 自动试一次。失败是静默的（系统不认这个地址就什么都不做），
