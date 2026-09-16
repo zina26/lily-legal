@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lily — Email confirmed</title>
+<style>
+  :root {
+    color-scheme: light;
+    --ink: #22202a;
+    --muted: #6b6675;
+    --line: rgba(0,0,0,0.1);
+    --bg: #faf9fb;
+    --card: #ffffff;
+    --accent: #5b3f8f;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 24px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 32px 24px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+  }
+  h1 { font-size: 22px; margin: 0 0 12px; }
+  p { color: var(--muted); margin: 0 0 24px; }
+  a.button {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 999px;
+    font-weight: 600;
+    min-width: 200px;
+  }
+  .hint { font-size: 14px; margin: 20px 0 0; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Email confirmed</h1>
+    <p>You can go back to Lily now.</p>
+    <a class="button" id="open" href="lily://auth-callback">Open Lily</a>
+    <p class="hint">If nothing happens, open the Lily app yourself — your email is already confirmed.</p>
+  </div>
+
+  <script>
+    // Supabase 把令牌放在地址栏的「#」后面，而「#」后面的东西不会发给服务器
+    // ——**只有这段脚本读得到它**，所以转交必须在浏览器里做。
+    //
+    // 为什么要经过这张页面，而不让邮件里的链接直接跳 lily://：
+    // 有些邮箱（实测 QQ 邮箱）的内置浏览器不认这种「打开 App」的地址，
+    // 直接跳会又一次白屏。**网页这一跳在任何客户端里都落得下来**，
+    // 落下来之后再试着进 App，进不去也还有一句话和一个按钮。
+    (function () {
+      var target = "lily://auth-callback" + (location.hash || "");
+      document.getElementById("open").setAttribute("href", target);
+      // 自动试一次。失败是静默的（系统不认这个地址就什么都不做），
+      // **所以上面那句话和那颗按钮必须一直在**，不能等失败了再显示。
+      try { location.replace(target); } catch (e) {}
+    })();
+  </script>
+</body>
+</html>
