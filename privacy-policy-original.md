@@ -148,7 +148,7 @@ Depending on where you live, you may have the right to:
 
 - **Complain** to your local data protection authority
 
-You can exercise the access, deletion, and export rights directly in the app (Settings → Privacy & data). For anything else, contact us at zinazx9726@gmail.com.
+You can exercise the access, deletion, and export rights directly in the app (Settings → Privacy & data). For anything else, contact us at getlilypro@gmail.com.
 
 ## 12. Mental health and safety
 
@@ -174,4 +174,4 @@ If we make a material change to this policy, we'll notify you in the app before 
 
 Xin Zhao / 603 Wangjingyuan, Fu'an East Road / Beijing, Beijing 100020 / China
 
-zinazx9726@gmail.com
+getlilypro@gmail.com
