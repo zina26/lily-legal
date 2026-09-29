@@ -1,6 +1,6 @@
 # Lily Privacy Policy
 
-Last updated: September 8, 2026
+Last updated: September 29, 2026
 
 This policy explains what Lily ("we," "us," "our") collects when you use the app, how we use and share it, and the choices you have. Our contact details are in section 16.
 
@@ -48,7 +48,19 @@ Lily uses artificial intelligence to support personal reflection and create pers
 
 ### Our AI service providers
 
-We use third-party AI services and technologies from **Anthropic, OpenAI, ElevenLabs, WaveSpeed, and Mureka**, including services delivered through **Amazon Web Services (AWS)** and WaveSpeed. These providers help us process language and audio and create content for you. We do not send every provider all of your information.
+We use third-party AI services and technologies from **Anthropic, OpenAI, ElevenLabs, WaveSpeed, and Mureka**, including services delivered through **OpenRouter** and **WaveSpeed**. These providers help us process language and audio and create content for you. We do not send every provider all of your information.
+
+### What each provider receives
+
+- **Anthropic (Claude)**, through OpenRouter, writes your morning guidance, evening reflections, Reset responses, summaries, and reviews. It receives your name, the focus, story, and words you choose during setup, what you write or say in reflections and Resets, and short summaries of earlier entries.
+- **OpenAI (Whisper)**, through WaveSpeed, transcribes a voice recording when your device cannot. It receives that recording only.
+- **ElevenLabs**, through WaveSpeed, reads your guidance and Reset responses aloud. It receives the text to be spoken.
+- **WaveSpeed** reads your guidance aloud with its own voice model when ElevenLabs is unavailable. It receives the same text to be spoken.
+- **Mureka**, through WaveSpeed, creates your personalized songs. It receives song lyrics written from your guidance.
+
+### How our providers protect your data
+
+We share your personal information only with service providers that provide the same or equal protection of your data as described in this policy. They may process it only to create the content you request, and may not use it for any other purpose.
 
 ### How your information is used
 

@@ -1,5 +1,12 @@
 # Progress
 
+## 2026-09-29 — Name each AI provider's data and state equal protection (App Review 5.1.1(i) / 5.1.2(i))
+
+- 遇到了什么：App Review 以 5.1.1(i) / 5.1.2(i) 拒了 Lily build 67，要求隐私政策写明收集什么、怎么收集、全部用途（含分享给第三方 AI），并确认第三方提供相同或同等的保护。核对时发现第 4 节仍写「services delivered through Amazon Web Services (AWS)」，而文字生成 2026-09-06 已从 AWS Bedrock 换到 OpenRouter。
+- 怎么解决的：第 4 节把 AWS 改为 OpenRouter 与 WaveSpeed；新增「What each provider receives」逐家说明做什么、收到什么（与 App 内 AI data sharing 详情页一致，含名字只发给 Anthropic）；新增「How our providers protect your data」写明只与提供相同或同等保护的服务商共享、只为生成用户请求的内容处理。privacy-policy.md、privacy.html、index.html 三份同步，Last updated 改为 2026-09-29。
+- 以后如何避免：换供应商或中间平台（如 Bedrock → OpenRouter）时，同一个改动里同步第 4 节与 App 内详情页；两者的供应商名单必须逐项一致。
+- 提交号：见本条所在提交。
+
 ## 2026-09-08 — Simplify public privacy policy
 
 - 遇到了什么：产品负责人指出公开隐私政策逐项披露模型与功能对应关系，并包含日志字段、存储与删除实现等过多技术细节。
